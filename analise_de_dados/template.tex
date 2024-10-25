@@ -1,0 +1,72 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tikz}
+
+% Pseudocode settings
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    stringstyle=\color{red},
+    frame=single,
+    breaklines=true
+}
+
+\title{Analise de Dados}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Analise Descritiva}
+
+A analise visual de grandes quantidades de dados é uma tarefa bastante complexa. Para auxiliar nessa tarefa normalmente utiliza-se a analise descritiva baseada no tipo de dado que está sendo analisado
+
+\subsection{Univariados}
+
+\begin{itemize}
+
+\item média: muito influenciada por valores acima do normal 
+
+\item moda: para valores categoricos
+
+\item mediana: ordena e retorna o valor central ou a média dos valores centrais  
+
+\item percentil: divide o conjunto em 4 
+
+\item variancia e desvio padrão
+
+\end{itemize}
+
+\subsection{Multivariados}
+
+\begin{itemize}
+
+\item variancia
+
+\item covariancia
+
+\end{itemize}
+
+\section{Pré-Processamento}
+
+\begin{description}
+
+\item[Dados desbalanceados] ara lidar com dados desbalanceados pode-se obter novos dados para a classe minoriária ou adicionar dados artificiais
+
+\item[Limpeza dos dados] Muitas condições podem afetar a qualidade dos dados como, falha humana, limitação dos sensores, ma fé e outros
+
+\item[Dados incompletos] podem ser preenchidos utilizando técnicas estatísicas se a quantidade a ser preenchida não for muito discrepante em relação aos dados que não estão vazios
+
+\item[Dados redundanes] podem confundir o modelo e dar a entender que o dado redundante tem mais importancia em relação aos outros dados, dito isso, é importante tratar esses casos
+
+\item[Ruídos] podem levar ao super-ajuste do modelo mas devem ser caracterizados antes de removidos pois podem ser informações importantes dentro do conjunto
+
+\item[Transformação de dados] Dependendo do método a ser aplicado, valores numéricos devem ser convertidos para categoricos e vice versa
+
+\end{description}
+
+\end{document}
