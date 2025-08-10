@@ -1,0 +1,39 @@
+name: Build All Notes
+
+on:
+  push:
+    paths:
+      - 'modules/**'
+      - '.github/workflows/**'
+
+jobs:
+  build-notes:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v4
+
+    - name: Find all main.tex files
+      id: find-tex
+      run: |
+        FILES=$(find modules -type f -name 'main.tex' | tr '\n' ' ')
+        echo "ROOT_FILES=${FILES}" >> $GITHUB_ENV
+
+    - name: Compile LaTeX files using Docker
+      uses: xu-cheng/latex-action@v3
+      with:
+        root_file: ${{ env.ROOT_FILES }}
+        latexmk_use_xelatex: false
+        work_in_root_file_dir: true
+
+    - name: Prepare Artifact Directory
+      run: |
+        mkdir notes
+        find modules -type f -name '*.pdf' -exec cp --parents {} notes/ \;
+
+    - name: Upload PDF Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: compiled-notes
+        path: notes/

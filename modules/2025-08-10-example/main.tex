@@ -1,0 +1,151 @@
+\documentclass[11pt,a4paper]{article}
+
+% ---------- Packages ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage[backend=biber,style=numeric]{biblatex}
+
+\addbibresource{references.bib}  % Bibliography file
+
+% ---------- Styling ----------
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{ML/AI Notes}
+\lhead{Your Name}
+\rfoot{\thepage}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    pdftitle={ML/AI Notes Template},
+    pdfauthor={Your Name}
+}
+
+% ---------- Custom Commands ----------
+\newcommand{\important}[1]{\textcolor{red}{\textbf{#1}}}
+\newcommand{\code}[1]{\texttt{#1}}
+
+% ---------- Listings for code blocks ----------
+\lstset{
+  backgroundcolor=\color{gray!10},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  captionpos=b,
+  tabsize=2
+}
+
+% ---------- Document ----------
+\title{Artificial Inteligence Notes}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% ---------- Sections ----------
+
+\section{Introduction}
+These notes cover core concepts in \important{Artificial Inteligence}, \important{Computer Vision}, and related fields.
+
+\section{Mathematical Foundations}
+
+\subsection{Linear Algebra}
+Let $\mathbf{X} \in \mathbb{R}^{m \times n}$ be a data matrix. Singular Value Decomposition (SVD) is:
+\[
+\mathbf{X} = \mathbf{U} \Sigma \mathbf{V}^T
+\]
+
+\subsection{Probability and Statistics}
+Bayes' Theorem:
+\[
+P(A|B) = \frac{P(B|A) P(A)}{P(B)}
+\]
+
+\section{Machine Learning Concepts}
+
+\subsection{Supervised Learning}
+A supervised model tries to learn a function $f: \mathcal{X} \to \mathcal{Y}$ from labeled data.
+
+\subsubsection{Linear Regression}
+Given data $(\mathbf{X}, \mathbf{y})$, the objective is:
+\[
+\min_{\mathbf{w}} \|\mathbf{Xw} - \mathbf{y}\|^2
+\]
+
+\section{Figures and Images}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{example-image}
+    \caption{Example figure caption.}
+    \label{fig:example}
+\end{figure}
+
+\section{Tables}
+\begin{table}[H]
+\centering
+\caption{Sample Accuracy Table}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{Accuracy} & \textbf{F1-Score} \\
+\midrule
+Logistic Regression & 88.5\% & 0.89 \\
+Random Forest       & 91.2\% & 0.91 \\
+CNN                 & 94.7\% & 0.95 \\
+\bottomrule
+\end{tabular}
+\label{tab:results}
+\end{table}
+
+\section{Code Example}
+\begin{lstlisting}[language=Python, caption=Train/Test Split Example]
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+\end{lstlisting}
+
+\section{Lists and Items}
+
+\subsection*{Key Concepts}
+\begin{itemize}
+    \item Supervised and Unsupervised Learning
+    \item Overfitting and Regularization
+    \item Gradient Descent
+\end{itemize}
+
+\subsection*{Workflow}
+\begin{enumerate}
+    \item Data collection
+    \item Preprocessing
+    \item Model selection
+    \item Evaluation
+\end{enumerate}
+
+\section{Citations}
+According to \cite{goodfellow2016deep}, deep learning has revolutionized AI.
+
+\printbibliography
+
+\end{document}
+
