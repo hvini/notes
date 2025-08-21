@@ -1,0 +1,201 @@
+\adocumentclass[11pt,a4paper]{article}
+
+% ---------- Packages ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage[backend=biber,style=numeric]{biblatex}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\addbibresource{references.bib}  % Bibliography file
+
+% ---------- Styling ----------
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Operações com Matrizes}
+\lhead{Vinícius}
+\rfoot{\thepage}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    pdftitle={ML/AI Notes Template},
+    pdfauthor={Your Name}
+}
+
+% ---------- Custom Commands ----------
+\newcommand{\important}[1]{\textcolor{red}{\textbf{#1}}}
+\newcommand{\code}[1]{\texttt{#1}}
+
+% ---------- Listings for code blocks ----------
+\lstset{
+  backgroundcolor=\color{gray!10},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  captionpos=b,
+  tabsize=2
+}
+
+% ---------- Document ----------
+\title{Operações com Matrizes}
+\author{Vinícius}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% ---------- Sections ----------
+
+\section{Produto Escalar}
+
+O produto escalar entre matrizes é uma operação fundamental da álgebra linear, utilizada para combinar duas matrizes e produzir uma terceira matriz resultante, de acordo com regras bem definidas de multiplicação e soma de elementos. Formalmente, dadas duas matrizes \( A \in \mathbb{R}^{m \times n} \) e \( B \in \mathbb{R}^{n \times p} \), o produto escalar \( C = A \cdot B \) é definido como:
+
+\begin{equation}
+	C = \left( c_{ij} \right)_{m \times p}, \quad \text{com} \quad c_{ij} = \sum_{k=1}^{n} a_{ik} b_{kj}
+	\label{eq:produto_escalar}
+\end{equation}
+
+onde:
+\begin{itemize}
+	\item \( C \in \mathbb{R}^{m \times p} \) é a matriz resultante do produto;
+	\item \( c_{ij} \) é o elemento da matriz \( C \) na linha \( i \) e coluna \( j \);
+	\item \( a_{ik} \) é o elemento da matriz \( A \) na linha \( i \) e coluna \( k \);
+	\item \( b_{kj} \) é o elemento da matriz \( B \) na linha \( k \) e coluna \( j \);
+	\item \( n \) representa o número de multiplicações/somas realizadas para calcular cada elemento \( c_{ij} \), equivalente ao número de colunas de \( A \) e de linhas de \( B \).
+\end{itemize}
+
+A definição formal do produto de matrizes segue a notação estabelecida por autores clássicos como Strang~\cite{strang2022introduction} e Lay~\cite{lay2003linear}, sendo amplamente utilizada em disciplinas de Álgebra Linear e aplicações computacionais.
+
+\subsection{Exemplo Numérico}
+
+Considere duas matrizes compatíveis para multiplicação:
+
+\[
+	A = \begin{pmatrix}
+		1 & 2 & 3 \\
+		4 & 5 & 6
+	\end{pmatrix}
+	\quad (\text{dimensão } 2 \times 3), \qquad
+	B = \begin{pmatrix}
+		7  & 8  \\
+		9  & 10 \\
+		11 & 12
+	\end{pmatrix}
+	\quad (\text{dimensão } 3 \times 2)
+\]
+
+Como o número de colunas de \( A \) é igual ao número de linhas de \( B \), o produto é definido. A matriz resultante \( C \in \mathbb{R}^{2 \times 2} \) é dada por:
+
+\[
+	C = A \cdot B =
+	\begin{pmatrix}
+		c_{11} & c_{12} \\
+		c_{21} & c_{22}
+	\end{pmatrix}
+\]
+
+Com os elementos calculados conforme a equação~\eqref{eq:produto_escalar}:
+
+\[
+	\begin{aligned}
+		c_{11} & = (1 \cdot 7) + (2 \cdot 9) + (3 \cdot 11) = 7 + 18 + 33 = 58    \\
+		c_{12} & = (1 \cdot 8) + (2 \cdot 10) + (3 \cdot 12) = 8 + 20 + 36 = 64   \\
+		c_{21} & = (4 \cdot 7) + (5 \cdot 9) + (6 \cdot 11) = 28 + 45 + 66 = 139  \\
+		c_{22} & = (4 \cdot 8) + (5 \cdot 10) + (6 \cdot 12) = 32 + 50 + 72 = 154
+	\end{aligned}
+\]
+
+Portanto:
+
+\[
+	C = \begin{pmatrix}
+		58  & 64  \\
+		139 & 154
+	\end{pmatrix}
+\]
+
+\subsection{Aplicações em Inteligência Artificial}
+
+O produto escalar de matrizes é amplamente empregado em tarefas de inteligência artificial (IA), aprendizado de máquina e aprendizado profundo, devido à sua natureza vetorizada e paralelizável, permitindo otimizações eficientes em hardware especializado (como GPUs).
+
+\begin{itemize}
+	\item \textbf{Aprendizado de Máquina (Machine Learning):} \\
+	      Em modelos lineares, como regressão linear ou logística, o produto escalar é usado para computar as predições: \( \hat{y} = XW + b \), onde \( X \in \mathbb{R}^{m \times n} \) representa a matriz de entrada e \( W \in \mathbb{R}^{n \times 1} \) é o vetor de pesos.
+
+	\item \textbf{Aprendizado Profundo (Deep Learning):} \\
+	      O produto escalar ocorre em camadas densas (\textit{fully connected}) de redes neurais: \( z = XW + b \). Durante a retropropagação (\textit{backpropagation}), os gradientes dos pesos também são calculados a partir de produtos escalares, frequentemente acelerados por bibliotecas como cuBLAS ou cuDNN.
+
+	\item \textbf{Visão Computacional (Computer Vision):} \\
+	      Em redes convolucionais, operações como \textit{im2col} transformam convoluções em multiplicações matriciais. Em \textit{Vision Transformers} (ViTs), o mecanismo de atenção usa o produto escalar para medir similaridades:
+
+	      \[
+		      \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
+	      \]
+
+	      Além disso, transformações geométricas em imagens (rotação, escala, translação, projeção) são modeladas por multiplicações de matrizes.
+\end{itemize}
+
+\subsection{Implementação Computacional}
+
+A implementação do produto escalar entre duas matrizes envolve três laços aninhados. Para garantir segurança e eficiência, todos os elementos da matriz resultante devem ser previamente inicializados com zero.
+
+Além disso, o acesso aos elementos das matrizes pode ser otimizado considerando seu layout em memória. Em armazenamento linear por linha (\textit{row-major order}), utilizado por linguagens como C/C++, os índices lineares são calculados da seguinte forma:
+
+\begin{itemize}
+	\item Para a matriz \( C \in \mathbb{R}^{m \times p} \):
+	      \[
+		      \text{índice} = i \cdot p + j, \quad \text{onde } i = \text{linha}, \, j = \text{coluna}, \, p = \text{nº colunas}
+	      \]
+	\item Para \( A \in \mathbb{R}^{m \times n} \):
+	      \[
+		      \text{índice} = i \cdot n + k, \quad \text{onde } i = \text{linha}, \, k = \text{coluna}, \, n = \text{nº colunas}
+	      \]
+	\item Para \( B \in \mathbb{R}^{n \times p} \):
+	      \[
+		      \text{índice} = k \cdot p + j, \quad \text{onde } k = \text{linha}, \, j = \text{coluna}, \, p = \text{nº colunas}
+	      \]
+\end{itemize}
+
+A seguir, o pseudocódigo da multiplicação matricial com base nesse modelo:
+
+\begin{algorithm}[H]
+	\caption{Produto escalar entre duas matrizes \( A \) e \( B \)}
+	\begin{algorithmic}[1]
+		\REQUIRE Matrizes \( A \in \mathbb{R}^{m \times n} \), \( B \in \mathbb{R}^{n \times p} \)
+		\ENSURE Matriz \( C = A \cdot B \in \mathbb{R}^{m \times p} \)
+		\STATE Inicialize \( C \) com zeros
+		\FOR{ \( i = 0 \) até \( m-1 \) }
+		\FOR{ \( j = 0 \) até \( p-1 \) }
+		\FOR{ \( k = 0 \) até \( n-1 \) }
+		\STATE \( C[i \cdot p + j] \gets C[i \cdot p + j] + A[i \cdot n + k] \times B[k \cdot p + j] \)
+		\ENDFOR
+		\ENDFOR
+		\ENDFOR
+		\RETURN \( C \)
+	\end{algorithmic}
+\end{algorithm}
+
+\printbibliography
+
+\end{document}
+
